@@ -18,6 +18,7 @@ hello.ap 是一个测试用文件.
 ```bash
 $ java -jar compiler-1.0-SNAPSHOT-jar-with-dependencies.jar hello.ap
 ```
+
 ## hello.ap 
 内容如下：
 ```
@@ -41,4 +42,19 @@ c=b/ \
 x
 /* test other */
 f=x+2
+```
+output:
+```bash
+10
+2
+3
+6
+15
+6
+3
+12
+3
+3
+5
+out:5
 ```
