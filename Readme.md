@@ -2,10 +2,57 @@
 这是为儿童创建的一门简单编程语言。
 基于JVM，可以有较好的扩展。
 
+
+
 # 依赖
-- Java 1.8+
+- Java version 11 or higher
 - Maven 3+
 
+# 安装antlr4
+ANTLR is really two things: a tool written in Java that translates your grammar to a parser/lexer in Java (or other target language) and the runtime library needed by the generated parsers/lexers
+```
+zhh@svr:/usr/local/lib$ sudo curl -O https://www.antlr.org/download/antlr-4.11.1-complete.jar
+$ vi ~/.bashrc
+export CLASSPATH=".:/usr/local/lib/antlr-4.11.1-complete.jar:$CLASSPATH"
+alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.11.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
+source ~/.bashrc
+```
+## 测试环境可用性
+```
+zhh@svr:~$ java org.antlr.v4.Tool
+ANTLR Parser Generator  Version 4.11.1
+zhh@svr:~$ ANTLR Parser Generator  Version 4.11.1^C
+zhh@svr:~$ java -jar /usr/local/lib/antlr-4.11.1-complete.jar
+ANTLR Parser Generator  Version 4.11.1
+```
+
+## 测试第一个语法
+新建Hello语言 Hello.g4
+```
+grammar Hello;
+r: 'hello' ID; // match keyword hello followed by an identifier
+ID: [a-z]+; // match lower-case identifiers
+WS: [ \t\r\n]+ -> skip; // skip spaces, tabs, newlines
+```
+```
+zhh@svr:~/git/apple/test$ antlr4 Hello.g4
+zhh@svr:~/git/apple/test$ javac Hello*.java
+zhh@svr:~/git/apple/test$ grun Hello r -tree
+Hello Zhh
+line 1:0 token recognition error at: 'H'
+line 1:6 token recognition error at: 'Z'
+line 1:1 missing 'hello' at 'ello'
+(r <missing 'hello'> ello)
+zhh@svr:~/git/apple/test$ grun Hello r -tree
+hello zhh
+(r hello zhh)
+```
+## 测试tinypython
+```
+zhh@svr:~/git/apple/test$ antlr4 Python3.g4
+zhh@svr:~/git/apple/test$ javac Py*.java
+zhh@svr:~/git/apple/test$ grun Python3 file_input -tokens test.py
+```
 # 编译
 进入项目目录。
 ```
