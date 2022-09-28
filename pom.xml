@@ -16,7 +16,7 @@
 
         <start-class>com.abloz.compile.Main</start-class>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
-        <spring-version>5.1.9.RELEASE</spring-version>
+        <spring-version>5.2.22.RELEASE</spring-version>
     </properties>
     <dependencies>
         
